@@ -64,7 +64,7 @@
 <body>
     <div class="main">
         <h2>Registration Form</h2>
-        <form action="">
+        <form action="/perform_registration" method="POST">
             <label for="first">First Name:</label>
             <input type="text" id="first" name="first" required />
 
@@ -80,12 +80,6 @@
                    title="Password must contain at least one number, 
                            one alphabet, one symbol, and be at 
                            least 8 characters long" required />
-
-            <label for="repassword">Re-type Password:</label>
-            <input type="password" id="repassword" name="repassword" required />
-
-            <label for="mobile">Contact:</label>
-            <input type="text" id="mobile" name="mobile" maxlength="10" required />
 
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>

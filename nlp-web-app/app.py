@@ -1,7 +1,9 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
+from db import Database
 
 app = Flask(__name__)
 
+dbo = Database()
 
 @app.route('/')
 def home():
@@ -11,7 +13,18 @@ def home():
 def register():
     return render_template('register.html')
 
-
+@app.route('/perform_registration', methods=['POST'])
+def perform_registration():
+    firstname = request.form.get('first')
+    lastname = request.form.get('last')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    fullname = firstname+lastname
+    response = dbo.insert(fullname,email,password)
+    if response:
+        return "Registration successful"
+    else:
+        return "email already exists"
 
 
 

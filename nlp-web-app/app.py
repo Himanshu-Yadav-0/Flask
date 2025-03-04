@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 from db import Database
 
 app = Flask(__name__)
@@ -31,10 +31,23 @@ def perform_login():
     useremail = request.form.get('email')
     password = request.form.get('password')  
     if dbo.checkforlogin(useremail,password):
-        return "login hogya bhidu"
+        return redirect('/profile')
     else:
         return render_template('login.html',message="Incorrect Email or Password",code=0)
-        
+    
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@app.route('/ner')
+def ner():
+    return "ner hoga yrr"        
+@app.route('/sentiment_analysis')
+def sentiment_analysis():
+    return "sentiment_analysis hoga yrr"        
+@app.route('/abuse_detection')
+def abuse_detection():
+    return "abuse_detection hoga yrr"        
 
 if __name__ == '__main__':
     app.run(debug=True,port=5050)

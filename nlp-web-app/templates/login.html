@@ -62,6 +62,10 @@
 <body>
     <div class="main">
         <h1>NLP App</h1>
+        
+        {%if message%}
+        <p style="color:#4caf50">{{message}}</p>
+        {%endif%}
         <h3>Enter your login credentials</h3>
 
         <form action="">

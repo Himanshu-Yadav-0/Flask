@@ -64,6 +64,9 @@
 <body>
     <div class="main">
         <h2>Registration Form</h2>
+        {%if message%}
+        <p style="color:#af4c4c">{{message}}</p>
+        {%endif%}
         <form action="/perform_registration" method="POST">
             <label for="first">First Name:</label>
             <input type="text" id="first" name="first" required />
@@ -75,8 +78,7 @@
             <input type="email" id="email" name="email" required />
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password"
-                   pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])\S{8,}$" 
+            <input type="password" id="password" name="password" 
                    title="Password must contain at least one number, 
                            one alphabet, one symbol, and be at 
                            least 8 characters long" required />

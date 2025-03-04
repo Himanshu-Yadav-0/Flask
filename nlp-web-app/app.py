@@ -22,9 +22,9 @@ def perform_registration():
     fullname = firstname+lastname
     response = dbo.insert(fullname,email,password)
     if response:
-        return "Registration successful"
+        return render_template('login.html',message="Registration Successful, Kindly Login to Proceed")
     else:
-        return "email already exists"
+        return render_template('register.html',message="Email already exist.")
 
 
 

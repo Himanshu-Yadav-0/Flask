@@ -22,11 +22,19 @@ def perform_registration():
     fullname = firstname+lastname
     response = dbo.insert(fullname,email,password)
     if response:
-        return render_template('login.html',message="Registration Successful, Kindly Login to Proceed")
+        return render_template('login.html',message="Registration Successful, Kindly Login to Proceed",code = 1)
     else:
         return render_template('register.html',message="Email already exist.")
 
-
+@app.route('/perform_login',methods=['POST'])
+def perform_login():
+    useremail = request.form.get('email')
+    password = request.form.get('password')  
+    if dbo.checkforlogin(useremail,password):
+        return "login hogya bhidu"
+    else:
+        return render_template('login.html',message="Incorrect Email or Password",code=0)
+        
 
 if __name__ == '__main__':
     app.run(debug=True,port=5050)

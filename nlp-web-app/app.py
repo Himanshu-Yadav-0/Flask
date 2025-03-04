@@ -1,5 +1,6 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask,render_template,request,redirect,jsonify
 from db import Database
+import spacy
 
 app = Flask(__name__)
 
@@ -41,7 +42,25 @@ def profile():
 
 @app.route('/ner')
 def ner():
-    return "ner hoga yrr"        
+    return render_template('ner.html')  
+@app.route('/perform_ner', methods=['POST'])
+def perform_ner():
+    usertext = request.form.get('text')
+    #generating a nlp model to do ner
+    nlp = spacy.load('en_core_web_md')
+    ner_labels = nlp.get_pipe('ner').labels
+    docs = nlp(usertext)
+    entities = []
+    for ents in docs.ents:
+        entities.append((ents.text,ents.label_))
+
+    extraction = ''
+    extraction = "<br>".join(f"{i[0]} =====> {i[1]}" for i in entities)
+    return render_template('ner.html',message=extraction,usertext=usertext)
+
+
+
+#not in the current use
 @app.route('/sentiment_analysis')
 def sentiment_analysis():
     return "sentiment_analysis hoga yrr"        

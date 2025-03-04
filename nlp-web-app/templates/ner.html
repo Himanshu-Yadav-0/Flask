@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf7e4;
+            color: #2d572c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #f4fbf0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 50%;
+            min-width: 300px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 90%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #b8e6a3;
+            border-radius: 5px;
+            background: #f4fbf0;
+            resize: none;
+            display: block;
+            margin: 0 auto;
+        }
+        input[type="submit"] {
+            background: #d8f3c7;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background: #b8e6a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/perform_ner" method="POST">
+            <label for="text">Type your text here</label>
+            <textarea name="text" id="text">{{ usertext }}</textarea>
+            <br>
+            <input type="submit" value="Extract">
+        </form>
+        {% if message %}
+        <p>{{ message | safe}}</p>
+        {%endif%}
+    </div>
+</body>
+</html>
